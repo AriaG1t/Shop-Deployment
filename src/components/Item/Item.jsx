@@ -89,7 +89,7 @@ function Item(item) {
                 }
             </div>
             <Modal isOpen={activeModal === `product${item.id}`}>
-                <h2 className="text-lg">Are you sure you want to delete this product?  " {item.title} "</h2>
+                <h2 className="text-lg">Are you sure you want to delete this product? <br /> " {item.title} "</h2>
                 <div className="mt-5">
                     <button onClick={() => {handleDelete()}} className="cursor-pointer hover:ring-3 hover:ring-mist-400 transition-all mr-4 bg-green-700 px-4 rounded-lg ">Delete</button>
                     <button onClick={() => setActiveModal(null)} className="cursor-pointer hover:ring-3 hover:ring-mist-400 transition-all bg-red-700 px-4 rounded-lg ">Cancel</button>

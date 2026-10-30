@@ -5,7 +5,7 @@ function Modal({ children, isOpen }) {
     const { setActiveModal } = useAppContext()
 
     return (
-        <div onClick={() => setActiveModal(null)} className={`${!isOpen && "hidden"} fixed h-screen w-screen flex justify-center items-center bg-black/80 top-0 right-0 z-90`}>
+        <div onClick={() => setActiveModal(null)} className={`${!isOpen && "hidden"} fixed h-screen w-screen flex justify-center items-center bg-black/80 p-8 top-0 right-0 z-90`}>
             <div 
             className="bg-gray-700 relative p-5 font-mono rounded-lg"
             onClick={(e) => e.stopPropagation()}
