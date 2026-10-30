@@ -1,0 +1,155 @@
+import { createContext, useContext, useEffect, useState } from "react";
+import { getProducts } from "../services/api";
+import db from "../../data/db2.json"
+
+export const AppContext = createContext(null)
+
+export const useAppContext = () => {
+    return useContext(AppContext)
+}
+
+function AppContextProvider({ children }) {
+
+    const useLocalStorage = (key, initialVlue) => {
+        const [value, setValue] = useState(() => {
+            let local = localStorage.getItem(key)
+            if (local !== null) {
+                return JSON.parse(local)
+            }
+            else {
+                return initialVlue
+            }
+        })
+
+        useEffect(() => {
+            localStorage.setItem(key, JSON.stringify(value))
+        }, [key, value])
+        return [value, setValue]
+    }
+
+    const [activeModal, setActiveModal] = useState(null)
+
+    const [products, setProducts] = useState([...db.products])
+
+    const [activeMenu, setActiveMenu] = useState(null)
+
+    const [isLoad, setIsLoad] = useState(false)
+
+    const [cartItems, setCartItems] = useLocalStorage("cart", [])
+
+    const [signUp, setSignUp] = useState({
+        email: "",
+        password: "",
+        rePassword: ""
+    })
+
+    const [login, setLogin] = useState({
+        email: "",
+        password: ""
+    })
+
+    const [isLogin, setIsLogin] = useLocalStorage("islogin", {
+        isLogin: false,
+        isAdmin: false
+    })
+
+    const [isLoginMode, setIsLoginMode] = useState(true)
+
+    // API call
+
+    // useEffect(() => {
+    //     setIsLoad(true)
+    //     getProducts()
+    //         .then(result => setProducts(result))
+    //         .catch(error => console.log(error))
+    //         .finally(() => setIsLoad(false))
+    // }, [])
+
+    const addToCart = (product) => {
+        setCartItems(prev => {
+            return [
+                ...prev,
+                {
+                    product: product,
+                    qty: 1
+                }
+            ]
+        })
+    }
+
+    const plusOne = (id) => {
+        setCartItems(prev => {
+            return prev.map(item => {
+                if (item.product.id === id) {
+                    return {
+                        ...item,
+                        qty: item.qty + 1
+                    }
+                } else {
+                    return item
+                }
+            })
+        })
+    }
+
+    const removeOne = (id) => {
+        setCartItems(prev => {
+            if (cartItems.find(item => item.product.id === id).qty === 1) {
+                return prev.filter(item => item.product.id !== id)
+            } else {
+                return prev.map(item => {
+                    if (item.product.id === id) {
+                        return {
+                            ...item,
+                            qty: item.qty - 1
+                        }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        })
+    }
+
+    const removeFromCart = (id) => {
+        setCartItems(prev => {
+            return prev.filter(item => item.product.id !== id)
+        })
+    }
+
+    const getQty = (id) => {
+        return cartItems.find(item => item.product.id === id)?.qty
+    }
+
+    return (
+        <AppContext.Provider
+            value={{
+                products,
+                setProducts,
+                isLoad,
+                setIsLoad,
+                cartItems,
+                addToCart,
+                plusOne,
+                removeOne,
+                removeFromCart,
+                getQty,
+                signUp,
+                setSignUp,
+                isLoginMode,
+                setIsLoginMode,
+                isLogin,
+                setIsLogin,
+                login,
+                setLogin,
+                activeMenu,
+                setActiveMenu,
+                activeModal,
+                setActiveModal
+            }}>
+            {children}
+        </AppContext.Provider>
+    )
+}
+
+export default AppContextProvider;

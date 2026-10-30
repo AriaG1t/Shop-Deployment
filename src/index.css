@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+body{
+    padding-top: 50px;
+    background-color: rgb(65, 65, 65);
+    color:rgb(195, 195, 195)
+}
+
+.myGr{
+  background: linear-gradient(160deg, rgb(85, 85, 85), rgb(39, 59, 81) 40%, rgb(20, 21, 41) 93%);
+}
+
+.specialLg{
+  background: linear-gradient(190deg, rgb(134, 99, 99), rgb(204, 49, 1));
+}
+
+.topLG{
+  background: linear-gradient(190deg, rgb(116, 114, 81), rgb(133, 124, 21));  
+}
+
+.skeleton{
+  animation: skeleton 3s infinite alternate;
+  background-size: 400%;
+  background-image: linear-gradient(90deg,rgb(102, 102, 102), rgb(71, 71, 71),rgb(102, 102, 102));
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 35px !important;
+  height: 35px !important;
+  color: #cfcfcf !important;
+  background-color: #727171cc;
+  padding:8px 0;
+  border-radius: 10px;
+}
+
+.imgSwipe .swiper-button-prev,
+.imgSwipe .swiper-button-next{
+  background-color: rgba(39, 39, 39, 0.725);
+  width: 32px !important;
+  height: 32px !important;
+}
+
+@keyframes skeleton {
+  0%{
+        background-position: 0;
+    }
+
+    100%{
+        background-position: 100%;
+    }
+}
