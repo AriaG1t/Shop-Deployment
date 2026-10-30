@@ -63,7 +63,7 @@ function Home() {
                             <h3 className="font-mono text-xl mr-3">Special Offers</h3>
                             <p className="text-sm font-thin">Best Price You'll Ever Find</p>
                         </div>
-                        <Link to="/items?sort=discount" className="h-8 max-w-32 sm:mt-0 mt-2 text-xs font-mono flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
+                        <Link to="/items?sort=discount" className="h-8 text-nowrap w-fit sm:mt-0 mt-2 text-xs font-mono flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
                             all products...
                         </Link>
                     </div>
@@ -75,7 +75,7 @@ function Home() {
                             <h3 className="font-mono text-xl mr-3">Top Rated</h3>
                             <p className="text-sm font-thin">Our Customers Favorite</p>
                         </div>
-                        <Link to="/items?sort=rating" className="h-8 max-w-32 sm:mt-0 mt-2 text-xs font-mono flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
+                        <Link to="/items?sort=rating" className="h-8 text-nowrap w-fit sm:mt-0 mt-2 text-xs font-mono flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
                             all products...
                         </Link>
                     </div>
@@ -91,9 +91,9 @@ function Home() {
                         {
                             categoryProducts.map(({category, products}) => (
                                 <SwiperSlide key={category}>
-                                    <div className="font-mono mt-3 flex-row items-baseline ml-1 flex justify-between">
-                                        <h2 className="text-xl mx-7">{category.charAt(0).toUpperCase()}{category.slice(1)}</h2>
-                                        <Link to={`/items?category=${category}`}className="h-8 max-w-32 sm:mt-0 mt-2 text-xs flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
+                                    <div className="font-mono mt-3 flex-col sm:flex-row items-baseline ml-1 flex justify-between">
+                                        <h2 className="text-xl sm:mx-7 mx-3">{category.charAt(0).toUpperCase()}{category.slice(1)}</h2>
+                                        <Link to={`/items?category=${category}`}className="h-8 text-nowrap w-fit sm:mt-0 mt-2 text-xs flex justify-center items-center bg-zinc-700 border hover:ring-mist-400 hover:ring-2 border-gray-600 rounded-full justify-self-center py-1 px-3">
                                             all products...
                                         </Link>
                                     </div>
