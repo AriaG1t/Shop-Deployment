@@ -173,7 +173,7 @@ function AdminCreate() {
                                             </>
                                 }
                             </div>
-                            <div className="flex items-center justify-between flex-wrap">
+                            <div className="flex items-center gap-2 justify-between flex-wrap">
                                 <div className="flex items-baseline flex-wrap gap-4">
                                     <h3>Features:</h3>
                                     {

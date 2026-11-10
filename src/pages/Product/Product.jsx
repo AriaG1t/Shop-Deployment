@@ -71,7 +71,7 @@ function Product() {
                                         {product.rating}
                                     </p>
                                     {
-                                        product.availability === "out_of_stock" ? <p className="bg-red-600 text-center px-2 rounded">Out of stock</p> :
+                                        product.availability === "out_of_stock" ? <p className="bg-red-600 w-fit mx-auto text-center px-2 rounded">Out of stock</p> :
                                             <>
 
                                                 <div className="flex my-2 gap-1.5 flex-wrap">
@@ -118,37 +118,40 @@ function Product() {
                                     }
                                 </div>
                             </div>
-                            <div className="fixed w-full bottom-0 left-0 pb-3 pt-2 rounded-t-2xl z-10 md:hidden flex justify-evenly items-baseline bg-zinc-700 border-t border-gray-400">
-                                <div className="flex">
-                                    {
-                                        product.discount === 0 ? <p className="text-green-300 self-center row-span-2">{product.price}$</p> :
-                                            <>
+                            {
+                                product.availability !== "out_of_stock" &&
+                                <div className="fixed w-full bottom-0 left-0 pb-3 pt-2 rounded-t-2xl z-10 md:hidden flex justify-evenly items-baseline bg-zinc-700 border-t border-gray-400">
+                                    <div className="flex">
+                                        {
+                                            product.discount === 0 ? <p className="text-green-300 self-center row-span-2">{product.price}$</p> :
+                                                <>
 
-                                                <p className="line-through">{product.price}$</p>
-                                                <p className="bg-red-500 text-neutral-200 ml-1 mr-4 rounded-lg px-1">{product.discount}%</p>
-                                                <p className="text-green-300">{(product.price * (1 - product.discount / 100)).toFixed(2)}$</p>
+                                                    <p className="line-through">{product.price}$</p>
+                                                    <p className="bg-red-500 text-neutral-200 ml-1 mr-4 rounded-lg px-1">{product.discount}%</p>
+                                                    <p className="text-green-300">{(product.price * (1 - product.discount / 100)).toFixed(2)}$</p>
+                                                </>
+                                        }
+                                    </div>
+                                    {
+                                        getQty(product.id) ?
+                                            <>
+                                                <div className="flex items-center">
+                                                    <button onClick={() => plusOne(product.id)} className="pb-1 size-9 cursor-pointer hover:ring-2 text-neutral-300 shadow-md hover:ring-neutral-300 transition-all bg-green-600 font-black text-2xl px-2 rounded-full">
+                                                        +
+                                                    </button>
+                                                    <p className="text-xl mx-5 border-b">{getQty(product.id)}</p>
+                                                    <button onClick={() => removeOne(product.id)} className="pb-1 size-9 cursor-pointer hover:ring-2 text-neutral-300 shadow-md hover:ring-neutral-300 transition-all bg-red-600 font-black text-2xl px-2 rounded-full">
+                                                        -
+                                                    </button>
+                                                </div>
                                             </>
+                                            :
+                                            <button onClick={() => addToCart(product)} className={`col-span-3 p-1.5 ${product.discount === 0 && "py-1.5"} row-start-1 rounded-lg border border-gray-400 shadow hover:ring-2 text-neutral-300 cursor-pointer hover:ring-gray-300 transition-all shadow-gray-700 bg-zinc-600 text-nowrap row-span-2 col-start-4`}>
+                                                Add to Cart
+                                            </button>
                                     }
                                 </div>
-                                {
-                                    getQty(product.id) ?
-                                        <>
-                                            <div className="flex items-center">
-                                                <button onClick={() => plusOne(product.id)} className="pb-1 size-9 cursor-pointer hover:ring-2 text-neutral-300 shadow-md hover:ring-neutral-300 transition-all bg-green-600 font-black text-2xl px-2 rounded-full">
-                                                    +
-                                                </button>
-                                                <p className="text-xl mx-5 border-b">{getQty(product.id)}</p>
-                                                <button onClick={() => removeOne(product.id)} className="pb-1 size-9 cursor-pointer hover:ring-2 text-neutral-300 shadow-md hover:ring-neutral-300 transition-all bg-red-600 font-black text-2xl px-2 rounded-full">
-                                                    -
-                                                </button>
-                                            </div>
-                                        </>
-                                        :
-                                        <button onClick={() => addToCart(product)} className={`col-span-3 p-1.5 ${product.discount === 0 && "py-1.5"} row-start-1 rounded-lg border border-gray-400 shadow hover:ring-2 text-neutral-300 cursor-pointer hover:ring-gray-300 transition-all shadow-gray-700 bg-zinc-600 text-nowrap row-span-2 col-start-4`}>
-                                            Add to Cart
-                                        </button>
-                                }
-                            </div>
+                            }
                             <div className="md:col-span-2 text-justify col-span-3">
                                 <p>{product.description}</p>
                                 <div className="font-mono flex mt-2 flex-wrap gap-2">
